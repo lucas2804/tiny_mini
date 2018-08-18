@@ -33,3 +33,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'aws-sdk'
+gem 'mysql2', '0.3.18'
+gem 'factory_bot'
