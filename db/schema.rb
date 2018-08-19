@@ -13,11 +13,9 @@
 ActiveRecord::Schema.define(version: 20180818072349) do
 
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "phone_number", limit: 20
     t.date "activation_date"
     t.date "deactivation_date"
-    t.string "phone_number", limit: 20
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
