@@ -36,3 +36,6 @@ gem 'aws-sdk'
 gem 'mysql2', '0.3.18'
 gem 'factory_bot'
 gem 'faker', '~> 1.5.0'
+gem "rmagick"
+gem "carrierwave"
+gem "activerecord-import"
