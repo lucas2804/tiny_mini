@@ -10,12 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180818072349) do
+ActiveRecord::Schema.define(version: 20180819142141) do
 
   create_table "contacts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "phone_number", limit: 20
     t.date "activation_date"
     t.date "deactivation_date"
+    t.index ["activation_date"], name: "index_contacts_on_activation_date"
+    t.index ["deactivation_date"], name: "index_contacts_on_deactivation_date"
+    t.index ["phone_number", "deactivation_date"], name: "index_contacts_on_phone_number_and_deactivation_date", unique: true
+    t.index ["phone_number"], name: "index_contacts_on_phone_number"
+  end
+
+  create_table "data_imports", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "link"
+    t.string "file_name"
+    t.boolean "is_imported"
+    t.datetime "failed_at"
+    t.datetime "in_progress_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "organizations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

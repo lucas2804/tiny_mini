@@ -1,8 +1,23 @@
 Rails.application.routes.draw do
-  resources :contacts
-  root to: 'users#index'
-  resources :organizations
-  devise_for :users
-  resources :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  root to: 'data_imports#index'
+
+  resources :contacts do
+    collection do
+      get :new_import_draw
+      post :do_import_draw
+    end
+  end
+
+
+  resources :data_imports, only: [:index] do
+    collection do
+      post :save
+    end
+
+    member do
+      post :import_contact_csv
+    end
+  end
+
 end

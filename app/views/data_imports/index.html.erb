@@ -1,0 +1,106 @@
+<p id="notice">
+  <%= flash[:notice] %>
+</p>
+
+<h2>Import Contacts</h2>
+<h3>Headers must match:</h3>
+<ul>
+  <li><strong>phone_number, activation_date, deactivation_date </strong></li>
+</ul>
+
+<h3>Column Types must match:</h3>
+<ul>
+  <li><strong>string, string, string</strong></li>
+  <li><strong>string, YYYY-MM-DD, YYYY-MM-DD</strong></li>
+  <li><strong>0987001, 2016-01-01, 2016-03-01</strong></li>
+</ul>
+
+
+<%= form_for(:data_import, url: { action: 'save', controller: 'data_imports' }, html: { multipart: true }) do |form| %>
+  <%= form.label(:contacts_csv, "Contact CSV") %>
+  <%= form.file_field(:link) %>
+  <%= submit_tag 'Import', class: 'mt3 btn btn-primary' %>
+<% end %>
+
+
+<h1>Data Imports</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Link contacts</th>
+    <th>Is Imported</th>
+    <th>created date</th>
+    <th>Import In Progress at</th>
+    <th>Import Failed at</th>
+    <th>Action</th>
+    <th colspan="4"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @data_imports.try(:each) do |data_import| %>
+    <tr>
+      <td><%= data_import.link_url %></td>
+      <td><%= data_import.is_imported? ? 'Yes' : 'No' %></td>
+      <td><%= data_import.created_at %></td>
+      <td><%= data_import.in_progress_at %></td>
+      <td><%= data_import.failed_at %></td>
+      <td><%= data_import.is_imported? ? 'Imported' : link_to('Do Import', import_contact_csv_data_import_path(data_import), method: :post) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div style="width: 30%; float: left">
+  <h1>Contacts</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Phone number</th>
+      <th>Activation date</th>
+      <th>Deactivation date</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @contacts.try(:each) do |contact| %>
+      <tr>
+        <td><%= contact.id %></td>
+        <td><%= contact.phone_number %></td>
+        <td><%= contact.activation_date %></td>
+        <td><%= contact.deactivation_date %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>
+<div style="width: 50%; float: left">
+  <h1>Actual activation date</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Phone number</th>
+      <th>Activation date</th>
+      <th>Deactivation date</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @actual_activation_date_contacts.try(:each) do |contact| %>
+      <tr>
+        <td><%= contact.id %></td>
+        <td><%= contact.phone_number %></td>
+        <td><%= contact.activation_date %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>
