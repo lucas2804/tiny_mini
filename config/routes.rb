@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :data_imports, only: [:index] do
     collection do
       post :save
+      get :download_actual_activation_date
     end
 
     member do

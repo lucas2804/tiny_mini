@@ -88,6 +88,7 @@
       <th>Phone number</th>
       <th>Activation date</th>
       <th>Deactivation date</th>
+      <th>Action</th>
       <th colspan="3"></th>
     </tr>
     </thead>
@@ -98,6 +99,7 @@
         <td><%= contact.id %></td>
         <td><%= contact.phone_number %></td>
         <td><%= contact.activation_date %></td>
+        <td><%= link_to "Download CSV", download_actual_activation_date_data_imports_path(format: "csv") %> </td>
       </tr>
     <% end %>
     </tbody>
