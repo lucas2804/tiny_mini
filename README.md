@@ -1,5 +1,9 @@
 # README
 
+## Demos on production
+
+![public/demo](public/demo.png)
+
 ## Unit tests
 
 ```ruby
